@@ -1,13 +1,27 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import pandas as pd
 from typing import List, Optional
 from pydantic import BaseModel
-import os
 
 # -------------------- FastAPI App --------------------
 app = FastAPI(title="IndianMovieList")
 
-# -------------------- Excel Path --------------------
+# -------------------- Enable CORS --------------------
+origins = [
+    "https://github.com/randommelo-lang/indian-movie-List",  # Replace with your GitHub Pages URL
+    "http://localhost:5500"        # Optional: for local frontend testing
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# -------------------- Excel Paths --------------------
 MOVIES_CSV_URL = "https://raw.githubusercontent.com/randommelo-lang/indian-movie-tracker-data/refs/heads/main/Movie_%26_TV_Movies.csv"
 TVSHOWS_CSV_URL = "https://raw.githubusercontent.com/randommelo-lang/indian-movie-tracker-data/refs/heads/main/Movie_%26_TV_TV_Shows.csv"
 
@@ -36,10 +50,8 @@ class TVShow(BaseModel):
     sequel_id: Optional[int]
     cover_image_url: Optional[str]
 
-
 # -------------------- Helper Functions --------------------
 def safe_int(value):
-    """Convert Excel cell to int if possible."""
     try:
         if pd.isna(value):
             return None
@@ -48,18 +60,16 @@ def safe_int(value):
     except (ValueError, TypeError):
         return None
 
-
 def safe_str(value):
-    """Convert to string if not NaN."""
     if pd.isna(value):
         return None
     return str(value).strip()
 
-
-# Global caches
+# -------------------- Global Caches --------------------
 _movies_cache: List[Movie] = []
 _tvshows_cache: List[TVShow] = []
 
+# -------------------- Data Loaders --------------------
 def read_movies() -> List[Movie]:
     global _movies_cache
     try:
@@ -78,15 +88,13 @@ def read_movies() -> List[Movie]:
                 prequel_id=safe_int(row.get("Prequel ID")),
                 sequel_id=safe_int(row.get("Sequel ID")),
             ))
-        _movies_cache = movies  # Update cache on successful fetch
+        _movies_cache = movies
         return movies
     except Exception as e:
         if _movies_cache:
-            # Return cached data if available
             return _movies_cache
         else:
             raise HTTPException(status_code=503, detail=f"Unable to fetch movies data: {str(e)}")
-
 
 def read_tvshows() -> List[TVShow]:
     global _tvshows_cache
@@ -106,16 +114,13 @@ def read_tvshows() -> List[TVShow]:
                 sequel_id=safe_int(row.get("Sequel ID")),
                 cover_image_url=safe_str(row.get("Cover Image URL")),
             ))
-        _tvshows_cache = tvshows  # Update cache on successful fetch
+        _tvshows_cache = tvshows
         return tvshows
     except Exception as e:
         if _tvshows_cache:
-            # Return cached data if available
             return _tvshows_cache
         else:
             raise HTTPException(status_code=503, detail=f"Unable to fetch TV shows data: {str(e)}")
-
-
 
 # -------------------- API Endpoints --------------------
 @app.get("/movies", response_model=List[Movie])
@@ -143,7 +148,3 @@ def get_tvshow_by_id(tv_id: int):
 @app.get("/ping")
 def ping():
     return {"status": "alive"}
-
-url = "https://raw.githubusercontent.com/randommelo-lang/indian-movie-tracker-data/refs/heads/main/Movie_%26_TV_Movies.csv"
-df = pd.read_csv(url)
-print(df.head())
