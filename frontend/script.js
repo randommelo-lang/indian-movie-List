@@ -1,4 +1,4 @@
-const API_BASE = "https://indian-movie-list-1.onrender.com/movies"; // replace with your hosted API
+const API_BASE = "https://indian-movie-list-1.onrender.com"; // replace with your hosted API
 
 async function fetchMovies() {
   const res = await fetch(`${API_BASE}/movies`);
