@@ -9,7 +9,7 @@ app = FastAPI(title="IndianMovieList")
 
 # -------------------- Enable CORS --------------------
 origins = [
-    "https://github.com/randommelo-lang/indian-movie-List",  # Replace with your GitHub Pages URL
+    "https://randommelo-lang.github.io",  # Replace with your GitHub Pages URL
     "http://localhost:5500"        # Optional: for local frontend testing
 ]
 
