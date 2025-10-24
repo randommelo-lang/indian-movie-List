@@ -5,24 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Indian Movie & TV Tracker (IML)</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .category-section { padding:2rem 0; }
-    .section-header { display:flex; justify-content:space-between; align-items:center; padding:0 2rem; }
-    .view-all{ text-decoration:none; font-weight:600; }
-    .top-section { display:flex; gap:2rem; padding:2rem; }
-    .top-list { flex:1; }
-    .top-grid { display:flex; flex-direction:column; gap:1rem; }
-  .rank-row{border-bottom:1px solid rgba(0,0,0,0.08);display:flex;align-items:center;gap:1rem;padding:0.8rem;border-radius:10px;background:#fffaf0;}
-.rank-num{font-size:1.4rem;font-weight:700;}
-.rank-poster{width:50px;height:70px;border-radius:6px;object-fit:cover;}
-.rank-info{flex:1;}
-.rank-title{margin:0;font-size:1rem;}
-.rank-tags{display:flex;gap:0.4rem;margin-top:0.2rem;}
-.tag{padding:0.2rem 0.6rem;border-radius:999px;background:#ffd88c;font-size:0.75rem;font-weight:500;}
-.rank-stats{font-size:0.9rem;white-space:nowrap;}
-.rank-row:hover{transform:translateY(-3px);box-shadow:0 4px 15px rgba(0,0,0,0.1);} 
-.rank-row{transition:all 0.3s ease;} 
-</style>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="navbar">
@@ -79,35 +62,42 @@
     <section class="top-section">
       <div class="top-list" id="top-movies">
         <div class="section-header">
-          <h2>TOP 100 MOVIES</h2>
+          <h2 class="gradient-title">TOP 100 MOVIES</h2>
           <a href="#" class="view-all">View All</a>
         </div>
         <div class="top-grid" id="top-movies-list">
-  <div class="rank-row">
-    <div class="rank-num">#1</div>
-    <img class="rank-poster" src="poster1.jpg" alt="Movie Poster">
-    <div class="rank-info">
-      <h3 class="rank-title">Movie Title</h3>
-      <div class="rank-tags"><span class="tag">Action</span><span class="tag">Drama</span></div>
-    </div>
-    <div class="rank-stats">96% • Movie • 2019</div>
-  </div></div>
+          <div class="rank-row">
+            <div class="rank-num">#1</div>
+            <img class="rank-poster" src="poster1.jpg" alt="Movie Poster">
+            <div class="rank-info">
+              <h3 class="rank-title">Movie Title</h3>
+              <div class="rank-tags">
+                <span class="tag">Action</span><span class="tag">Drama</span>
+              </div>
+            </div>
+            <div class="rank-stats">96% • Movie • 2019</div>
+          </div>
+        </div>
       </div>
+
       <div class="top-list" id="top-tvshows">
         <div class="section-header">
-          <h2>TOP 100 TV SHOWS</h2>
+          <h2 class="gradient-title">TOP 100 TV SHOWS</h2>
           <a href="#" class="view-all">View All</a>
         </div>
         <div class="top-grid" id="top-tvshows-list">
-  <div class="rank-row">
-    <div class="rank-num">#1</div>
-    <img class="rank-poster" src="poster2.jpg" alt="TV Poster">
-    <div class="rank-info">
-      <h3 class="rank-title">TV Show Title</h3>
-      <div class="rank-tags"><span class="tag">Crime</span><span class="tag">Thriller</span></div>
-    </div>
-    <div class="rank-stats">96% • TV • 2019–2024</div>
-  </div></div>
+          <div class="rank-row">
+            <div class="rank-num">#1</div>
+            <img class="rank-poster" src="poster2.jpg" alt="TV Poster">
+            <div class="rank-info">
+              <h3 class="rank-title">TV Show Title</h3>
+              <div class="rank-tags">
+                <span class="tag">Crime</span><span class="tag">Thriller</span>
+              </div>
+            </div>
+            <div class="rank-stats">96% • TV • 2019–2024</div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
