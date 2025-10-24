@@ -10,9 +10,9 @@
   <!-- HEADER / NAVBAR -->
   <header class="navbar">
     <div class="nav-left">
-      <a href="#" class="logo">𝓘𝓜𝓛</a>
-      <a href="#movies" class="nav-link">Movies</a>
-      <a href="#tvshows" class="nav-link">TV Shows</a>
+      <a href="#" class="logo" id="homeBtn">𝓘𝓜𝓛</a>
+      <a href="#" class="nav-link" id="moviesBtn">Movies</a>
+      <a href="#" class="nav-link" id="tvshowsBtn">TV Shows</a>
     </div>
 
     <div class="nav-center">
@@ -29,12 +29,12 @@
   <!-- MAIN CONTENT -->
   <main>
     <section id="movies">
-      <h2>Movies</h2>
+      <h2>🎥 Movies</h2>
       <div id="movie-list" class="grid"></div>
     </section>
 
     <section id="tvshows">
-      <h2>TV Shows</h2>
+      <h2>📺 TV Shows</h2>
       <div id="tvshow-list" class="grid"></div>
     </section>
   </main>
@@ -49,6 +49,28 @@
         const text = card.innerText.toLowerCase();
         card.style.display = text.includes(query) ? "block" : "none";
       });
+    });
+
+    // Navigation filtering behavior
+    const moviesSection = document.getElementById("movies");
+    const tvshowsSection = document.getElementById("tvshows");
+    const moviesBtn = document.getElementById("moviesBtn");
+    const tvshowsBtn = document.getElementById("tvshowsBtn");
+    const homeBtn = document.getElementById("homeBtn");
+
+    moviesBtn.addEventListener("click", () => {
+      moviesSection.style.display = "block";
+      tvshowsSection.style.display = "none";
+    });
+
+    tvshowsBtn.addEventListener("click", () => {
+      tvshowsSection.style.display = "block";
+      moviesSection.style.display = "none";
+    });
+
+    homeBtn.addEventListener("click", () => {
+      moviesSection.style.display = "block";
+      tvshowsSection.style.display = "block";
     });
   </script>
 </body>
