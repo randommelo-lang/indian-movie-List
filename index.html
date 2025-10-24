@@ -5,20 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Indian Movie & TV Tracker (IML)</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .category-section { padding:2rem 0; }
+    .section-header { display:flex; justify-content:space-between; align-items:center; padding:0 2rem; }
+    .view-all{ text-decoration:none; font-weight:600; }
+    .top-section { display:flex; gap:2rem; padding:2rem; }
+    .top-list { flex:1; }
+    .top-grid { display:flex; flex-direction:column; gap:1rem; }
+  .rank-row{border-bottom:1px solid rgba(0,0,0,0.08);display:flex;align-items:center;gap:1rem;padding:0.8rem;border-radius:10px;background:#fffaf0;}
+.rank-num{font-size:1.4rem;font-weight:700;}
+.rank-poster{width:50px;height:70px;border-radius:6px;object-fit:cover;}
+.rank-info{flex:1;}
+.rank-title{margin:0;font-size:1rem;}
+.rank-tags{display:flex;gap:0.4rem;margin-top:0.2rem;}
+.tag{padding:0.2rem 0.6rem;border-radius:999px;background:#ffd88c;font-size:0.75rem;font-weight:500;}
+.rank-stats{font-size:0.9rem;white-space:nowrap;}
+.rank-row:hover{transform:translateY(-3px);box-shadow:0 4px 15px rgba(0,0,0,0.1);} 
+.rank-row{transition:all 0.3s ease;} 
+</style>
 </head>
 <body>
-  <!-- HEADER / NAVBAR -->
   <header class="navbar">
     <div class="nav-left">
       <a href="#" class="logo" id="homeBtn">𝓘𝓜𝓛</a>
       <a href="#" class="nav-link" id="moviesBtn">Movies</a>
       <a href="#" class="nav-link" id="tvshowsBtn">TV Shows</a>
     </div>
-
     <div class="nav-center">
       <input type="text" id="searchBar" placeholder="Search movies or TV shows...">
     </div>
-
     <div class="nav-right">
       <a href="#" class="nav-link">Social</a>
       <a href="#" class="nav-link">Login</a>
@@ -26,52 +41,77 @@
     </div>
   </header>
 
-  <!-- MAIN CONTENT -->
   <main>
-    <section id="movies">
-      <h2>Movies</h2>
-      <div id="movie-list" class="grid"></div>
+    <!-- Section blocks -->
+    <section class="category-section">
+      <div class="section-header">
+        <h2>TRENDING MOVIES & TV SHOWS</h2>
+        <a href="#" class="view-all">View All</a>
+      </div>
+      <div class="grid" id="trending-list"></div>
     </section>
 
-    <section id="tvshows">
-      <h2>TV Shows</h2>
-      <div id="tvshow-list" class="grid"></div>
+    <section class="category-section">
+      <div class="section-header">
+        <h2>POPULAR THIS YEAR</h2>
+        <a href="#" class="view-all">View All</a>
+      </div>
+      <div class="grid" id="popular-year-list"></div>
+    </section>
+
+    <section class="category-section">
+      <div class="section-header">
+        <h2>UPCOMING MOVIES & TV SHOWS</h2>
+        <a href="#" class="view-all">View All</a>
+      </div>
+      <div class="grid" id="upcoming-list"></div>
+    </section>
+
+    <section class="category-section">
+      <div class="section-header">
+        <h2>ALL TIME POPULAR</h2>
+        <a href="#" class="view-all">View All</a>
+      </div>
+      <div class="grid" id="alltime-list"></div>
+    </section>
+
+    <!-- Top 100 side by side -->
+    <section class="top-section">
+      <div class="top-list" id="top-movies">
+        <div class="section-header">
+          <h2>TOP 100 MOVIES</h2>
+          <a href="#" class="view-all">View All</a>
+        </div>
+        <div class="top-grid" id="top-movies-list">
+  <div class="rank-row">
+    <div class="rank-num">#1</div>
+    <img class="rank-poster" src="poster1.jpg" alt="Movie Poster">
+    <div class="rank-info">
+      <h3 class="rank-title">Movie Title</h3>
+      <div class="rank-tags"><span class="tag">Action</span><span class="tag">Drama</span></div>
+    </div>
+    <div class="rank-stats">96% • Movie • 2019</div>
+  </div></div>
+      </div>
+      <div class="top-list" id="top-tvshows">
+        <div class="section-header">
+          <h2>TOP 100 TV SHOWS</h2>
+          <a href="#" class="view-all">View All</a>
+        </div>
+        <div class="top-grid" id="top-tvshows-list">
+  <div class="rank-row">
+    <div class="rank-num">#1</div>
+    <img class="rank-poster" src="poster2.jpg" alt="TV Poster">
+    <div class="rank-info">
+      <h3 class="rank-title">TV Show Title</h3>
+      <div class="rank-tags"><span class="tag">Crime</span><span class="tag">Thriller</span></div>
+    </div>
+    <div class="rank-stats">96% • TV • 2019–2024</div>
+  </div></div>
+      </div>
     </section>
   </main>
 
   <script src="script.js"></script>
-  <script>
-    // Simple client-side search filter
-    const searchInput = document.getElementById("searchBar");
-    searchInput.addEventListener("input", () => {
-      const query = searchInput.value.toLowerCase();
-      document.querySelectorAll(".card").forEach(card => {
-        const text = card.innerText.toLowerCase();
-        card.style.display = text.includes(query) ? "block" : "none";
-      });
-    });
-
-    // Navigation filtering behavior
-    const moviesSection = document.getElementById("movies");
-    const tvshowsSection = document.getElementById("tvshows");
-    const moviesBtn = document.getElementById("moviesBtn");
-    const tvshowsBtn = document.getElementById("tvshowsBtn");
-    const homeBtn = document.getElementById("homeBtn");
-
-    moviesBtn.addEventListener("click", () => {
-      moviesSection.style.display = "block";
-      tvshowsSection.style.display = "none";
-    });
-
-    tvshowsBtn.addEventListener("click", () => {
-      tvshowsSection.style.display = "block";
-      moviesSection.style.display = "none";
-    });
-
-    homeBtn.addEventListener("click", () => {
-      moviesSection.style.display = "block";
-      tvshowsSection.style.display = "block";
-    });
-  </script>
 </body>
 </html>
