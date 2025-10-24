@@ -1,47 +1,164 @@
+/* General Body */
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
-  background-color: #f9f9f9;
+  font-family: "Poppins", Arial, sans-serif;
+  background-color: #fff5d6; /* Cream background for the entire page */
   margin: 0;
   color: #222;
 }
 
-header {
-  background-color: #1a1a1a;
-  color: white;
+/* Gradient Text Accent */
+h1, h2, h3, .logo, .nav-link, .signup-btn {
+  background: linear-gradient(90deg, #ff9900, #ffd700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0a0f2c; /* Dark navy header */
+  padding: 0.8rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  border-bottom: 2px solid #ffb84d;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
+  margin-right: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  opacity: 0.8;
+  text-shadow: 0 0 10px #ff9900;
+}
+
+.signup-btn {
+  background: linear-gradient(90deg, #ff9900, #ffd700);
+  color: #0a0f2c;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.signup-btn:hover {
+  background: #fff1b8;
+  color: #0a0f2c;
+}
+
+/* Search Bar */
+.nav-center input {
+  padding: 0.5rem 1rem;
+  width: 300px;
+  border: 2px solid #ffb84d;
+  border-radius: 20px;
+  font-size: 1rem;
+  outline: none;
+  background-color: #fff5d6; /* Cream search bar */
+  color: #ff9900;
+  box-shadow: 0 0 8px rgba(255, 204, 0, 0.4);
+  transition: box-shadow 0.3s ease;
+}
+
+.nav-center input::placeholder {
+  color: #ffb84d;
+}
+
+.nav-center input:focus {
+  box-shadow: 0 0 12px rgba(255, 204, 0, 0.7);
+}
+
+/* Main Content */
+main {
+  background: #fff5d6; /* Cream background for main section */
+  padding: 2rem 0;
+  border-top: 3px solid #ffb84d;
+  box-shadow: inset 0 0 20px rgba(255, 204, 0, 0.1);
+}
+
+/* Section Titles */
+main h2 {
   text-align: center;
-  padding: 1rem 0;
+  font-size: 1.8rem;
+  margin-top: 2rem;
+  color: #ff9900;
 }
 
-h2 {
-  border-bottom: 2px solid #ffcc00;
-  padding-bottom: 0.3rem;
-}
-
+/* Grid Layout */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
+  gap: 1.5rem;
+  padding: 2rem;
 }
 
+/* Cards */
 .card {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: #fffaf0;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border: 2px solid #ffb84d;
+  box-shadow: 0 8px 25px rgba(255, 204, 0, 0.3);
 }
 
 .card img {
   width: 100%;
-  border-radius: 8px;
+  border-radius: 10px;
+  height: 300px;
+  object-fit: cover;
 }
 
 .card h3 {
-  margin: 0.5rem 0;
+  margin: 0.8rem 0 0.4rem;
+  color: #ff9900;
 }
 
 .card p {
   font-size: 0.9rem;
-  color: #555;
+  color: #444;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0f2c;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff9900, #ffd700);
+  border-radius: 10px;
 }
