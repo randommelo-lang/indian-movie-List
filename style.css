@@ -281,7 +281,7 @@ body.darkmode .view-all {
   color: #ffd700;
 }
 .view-all:focus {
-  outline: 3px solid var(--focus);
+  outline: 3px solid var(--gradient-light);
   outline-offset: 2px;
 }
 
