@@ -14,7 +14,7 @@
 }
 
 body {
-  font-family: "Poppins", Arial, sans-serif;
+  font-family: "Merriweather", serif;
   background-color: var(--bg-light);
   margin: 0;
   color: var(--text-main);
@@ -56,7 +56,6 @@ body.darkmode .logo {
   -webkit-text-fill-color: transparent;
 }
 .gradient-title {
-  background: var(--gradient-light);
   font-family: "Merriweather", serif;
   font-size: 1rem;
 }
@@ -71,11 +70,26 @@ body.darkmode .gradient-title {
   display: flex;
   justify-content: center;
   background: var(--navbar-dark);
+  padding: 0.8rem 2rem;
   position: sticky;
   top: 0;
   z-index: 1000;
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
   border-bottom: 2px solid var(--contrast);
+}
+
+.navbar a:focus,
+.navbar button:focus,
+.navbar input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.navbar a:hover,
+.navbar button:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 10px var(--contrast);
+  transition: transform 0.2s ease, text-shadow 0.2s ease;
 }
 
 body.darkmode .navbar {
@@ -100,6 +114,10 @@ nav {
   color: var(--contrast);
 }
 
+.logo:hover {
+  transform: scale(1.1);
+}
+
 /* Strong readable nav links */
 .nav-link {
   text-decoration: none;
@@ -117,8 +135,6 @@ body.darkmode .nav-link {
 .nav-link:focus {
   opacity: 0.9;
   text-shadow: 0 0 12px var(--contrast);
-  outline: 3px solid var(--focus);
-  outline-offset: 2px;
 }
 
 .signup-btn {
@@ -226,6 +242,24 @@ main h2 {
 @keyframes fadein {
   from { opacity: 0; transform: translateY(12px);}
   to   { opacity: 1; transform: none;}
+}
+
+@keyframes logoPop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.logo{
+  animation: logoPop 0.8s ease-out forwards;
 }
 
 .section-header {
