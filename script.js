@@ -1,95 +1,70 @@
-const API_BASE = "https://indian-movie-list.onrender.com"; // replace with your hosted API
+const API_BASE = "https://indian-movie-list.onrender.com";
 
-// ======= DOM ELEMENTS =======
-const trending = document.getElementById("trending-list");
-const popularYear = document.getElementById("popular-year-list");
-const upcoming = document.getElementById("upcoming-list");
-const allTime = document.getElementById("alltime-list");
-const darkToggle = document.getElementById("darkModeToggle");
+const elements = {
+  trending: document.getElementById("trending-list"),
+  popularYear: document.getElementById("popular-year-list"),
+  upcoming: document.getElementById("upcoming-list"),
+  allTime: document.getElementById("alltime-list"),
+  darkToggle: document.getElementById("darkModeToggle")
+};
 
-// ======= DARK MODE TOGGLE =======
+// Dark Mode Setup
 document.addEventListener("DOMContentLoaded", () => {
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const savedTheme = localStorage.getItem("iml_darkmode");
-  
-  if (savedTheme === "true" || (!savedTheme && prefersDark)) {
+  if (savedTheme === "true" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
     document.body.classList.add("darkmode");
+    elements.darkToggle.querySelector(".toggle-icon").textContent = "☀️";
   }
 });
-
-darkToggle.addEventListener("click", () => {
+elements.darkToggle.addEventListener("click", () => {
   document.body.classList.toggle("darkmode");
-  const isDark = document.body.classList.contains("darkmode");
-  localStorage.setItem("iml_darkmode", isDark);
-  darkToggle.querySelector(".toggle-icon").textContent = isDark ? "☀️" : "🌙";
+  const dark = document.body.classList.contains("darkmode");
+  localStorage.setItem("iml_darkmode", dark);
+  elements.darkToggle.querySelector(".toggle-icon").textContent = dark ? "☀️" : "🌙";
 });
 
-// ======= LOADING STATE HANDLER =======
-function showLoading(target) {
-  target.innerHTML = `<div class="loading">Loading...</div>`;
-}
-
-// ======= FETCH FUNCTIONS =======
+// Fetch and Display Data
 async function fetchContent(endpoint, container, label) {
   try {
-    showLoading(container);
+    container.innerHTML = `<div class="loading">Loading ${label}...</div>`;
     const res = await fetch(`${API_BASE}/${endpoint}`);
-    if (!res.ok) throw new Error(`Failed to fetch ${label}`);
+    if (!res.ok) throw new Error(`${label} data unavailable.`);
     const items = await res.json();
 
     container.innerHTML = items.map(item => `
       <article class="card" tabindex="0" role="article" aria-label="${item.title}">
-        <img src="${item.cover_image_url}" alt="Poster of ${item.title}" loading="lazy">
+        <img src="${item.cover_image_url}" alt="${item.title} poster" loading="lazy">
         <h3>${item.title}</h3>
         <p>${item.language} • ${item.release_year || "TBA"}</p>
-        <p><b>OTT:</b> ${item.ott_platform || "Unknown"}</p>
-      </article>
-    `).join("");
+        <p><b>OTT:</b> ${item.ott_platform || "N/A"}</p>
+      </article>`).join("");
 
-    // Animate when loaded
-    container.style.animation = "fadein 1.4s ease";
+    container.style.animation = "fadein 1s ease";
   } catch (err) {
-    container.innerHTML = `<p class="error">⚠️ ${err.message}</p>`;
+    container.innerHTML = `<p class="error">${err.message}</p>`;
   }
 }
 
-// ======= INITIAL FETCH CALLS =======
-fetchContent("movies", trending, "trending movies");
-fetchContent("movies/popular", popularYear, "popular this year");
-fetchContent("upcoming", upcoming, "upcoming movies and TV shows");
-fetchContent("movies/alltime", allTime, "all-time popular movies");
+// Dynamic Fetch Calls
+fetchContent("movies", elements.trending, "Trending Movies & TV Shows");
+fetchContent("movies/popular", elements.popularYear, "Popular This Year");
+fetchContent("upcoming", elements.upcoming, "Upcoming Releases");
+fetchContent("movies/alltime", elements.allTime, "All Time Popular");
 
-// ======= PERSONALIZATION: REMEMBER LAST VIEWED SECTION =======
-const navButtons = {
-  homeBtn: document.getElementById("homeBtn"),
-  moviesBtn: document.getElementById("moviesBtn"),
-  tvshowsBtn: document.getElementById("tvshowsBtn")
-};
-
-Object.entries(navButtons).forEach(([key, btn]) => {
-  if (!btn) return;
-  btn.addEventListener("click", () => {
-    localStorage.setItem("last_section", key);
-  });
+// Personalized Section Memory
+["homeBtn", "moviesBtn", "tvshowsBtn"].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener("click", () => localStorage.setItem("last_section", id));
 });
-
-// Restore user’s last section on reload (example personalization)
 document.addEventListener("DOMContentLoaded", () => {
-  const lastSection = localStorage.getItem("last_section");
-  if (lastSection && navButtons[lastSection]) {
-    navButtons[lastSection].focus();
-  }
+  const last = localStorage.getItem("last_section");
+  if (last && document.getElementById(last)) document.getElementById(last).focus();
 });
 
-// ======= SIMPLE INTERACTIVE STORYTELLING EFFECT (On scroll) =======
+// Intersection Observer for Storytelling Animation
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.animation = "fadein 1s ease forwards";
-    }
+    if (entry.isIntersecting) entry.target.style.animation = "fadein 1.2s ease forwards";
   });
 }, { threshold: 0.2 });
-
-document.querySelectorAll(".category-section").forEach(section => {
-  observer.observe(section);
-});
+document.querySelectorAll(".category-section").forEach(sec => observer.observe(sec));
