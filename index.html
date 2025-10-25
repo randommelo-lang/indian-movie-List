@@ -5,79 +5,99 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Indian Movie & TV Tracker (IML)</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-  <header class="navbar" role="navigation" aria-label="Main navigation">
-    <nav>
-      <div class="nav-left">
-        <a href="#" class="logo" id="homeBtn" aria-label="Home">𝓘𝓜𝓛</a>
-        <a href="#" class="nav-link" id="moviesBtn" aria-label="Movies">Movies</a>
-        <a href="#" class="nav-link" id="tvshowsBtn" aria-label="TV Shows">TV Shows</a>
-      </div>
-      <div class="nav-center">
-        <input type="search" id="searchBar" placeholder="Search movies or TV shows..." aria-label="Search"/>
-      </div>
-      <div class="nav-right">
-        <a href="#" class="nav-link" aria-label="Social">Social</a>
-        <button id="darkModeToggle" aria-label="Toggle dark mode" class="darkmode-btn" type="button">
-          <span class="toggle-icon" aria-hidden="true">🌙</span>
-        </button>
-        <a href="#" class="nav-link" aria-label="Login">Login</a>
-        <a href="#" class="signup-btn" aria-label="Sign Up">Sign Up</a>
-      </div>
-    </nav>
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="#" class="logo" id="homeBtn">𝓘𝓜𝓛</a>
+      <a href="#" class="nav-link" id="moviesBtn">Movies</a>
+      <a href="#" class="nav-link" id="tvshowsBtn">TV Shows</a>
+    </div>
+    <div class="nav-center">
+      <input type="text" id="searchBar" placeholder="Search movies or TV shows...">
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-link">Social</a>
+      <a href="#" class="nav-link">Login</a>
+      <a href="#" class="signup-btn">Sign Up</a>
+    </div>
   </header>
 
-  <main id="main-content">
-    <section class="category-section" aria-label="Trending Movies and TV Shows">
+  <main>
+    <!-- Section blocks -->
+    <section class="category-section">
       <div class="section-header">
         <h2>TRENDING MOVIES & TV SHOWS</h2>
-        <a href="#" class="view-all" aria-label="View all trending">View All</a>
+        <a href="#" class="view-all">View All</a>
       </div>
       <div class="grid" id="trending-list"></div>
     </section>
 
-    <section class="category-section" aria-label="Popular This Year">
+    <section class="category-section">
       <div class="section-header">
         <h2>POPULAR THIS YEAR</h2>
-        <a href="#" class="view-all" aria-label="View all popular this year">View All</a>
+        <a href="#" class="view-all">View All</a>
       </div>
       <div class="grid" id="popular-year-list"></div>
     </section>
 
-    <section class="category-section" aria-label="Upcoming Movies and TV Shows">
+    <section class="category-section">
       <div class="section-header">
         <h2>UPCOMING MOVIES & TV SHOWS</h2>
-        <a href="#" class="view-all" aria-label="View all upcoming">View All</a>
+        <a href="#" class="view-all">View All</a>
       </div>
       <div class="grid" id="upcoming-list"></div>
     </section>
 
-    <section class="category-section" aria-label="All Time Popular">
+    <section class="category-section">
       <div class="section-header">
         <h2>ALL TIME POPULAR</h2>
-        <a href="#" class="view-all" aria-label="View all time popular">View All</a>
+        <a href="#" class="view-all">View All</a>
       </div>
       <div class="grid" id="alltime-list"></div>
     </section>
 
-    <section class="top-section" aria-label="Top 100 Movies and TV Shows">
+    <!-- Top 100 side by side -->
+    <section class="top-section">
       <div class="top-list" id="top-movies">
         <div class="section-header">
           <h2 class="gradient-title">TOP 100 MOVIES</h2>
-          <a href="#" class="view-all" aria-label="View all top movies">View All</a>
+          <a href="#" class="view-all">View All</a>
         </div>
-        <div class="top-grid" id="top-movies-list"></div>
+        <div class="top-grid" id="top-movies-list">
+          <div class="rank-row">
+            <div class="rank-num">#1</div>
+            <img class="rank-poster" src="poster1.jpg" alt="Movie Poster">
+            <div class="rank-info">
+              <h3 class="rank-title">Movie Title</h3>
+              <div class="rank-tags">
+                <span class="tag">Action</span><span class="tag">Drama</span>
+              </div>
+            </div>
+            <div class="rank-stats">96% • Movie • 2019</div>
+          </div>
+        </div>
       </div>
 
       <div class="top-list" id="top-tvshows">
         <div class="section-header">
           <h2 class="gradient-title">TOP 100 TV SHOWS</h2>
-          <a href="#" class="view-all" aria-label="View all top TV shows">View All</a>
+          <a href="#" class="view-all">View All</a>
         </div>
-        <div class="top-grid" id="top-tvshows-list"></div>
+        <div class="top-grid" id="top-tvshows-list">
+          <div class="rank-row">
+            <div class="rank-num">#1</div>
+            <img class="rank-poster" src="poster2.jpg" alt="TV Poster">
+            <div class="rank-info">
+              <h3 class="rank-title">TV Show Title</h3>
+              <div class="rank-tags">
+                <span class="tag">Crime</span><span class="tag">Thriller</span>
+              </div>
+            </div>
+            <div class="rank-stats">96% • TV • 2019–2024</div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
